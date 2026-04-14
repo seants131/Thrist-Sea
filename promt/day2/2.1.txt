@@ -1,0 +1,32 @@
+Prompt 2.1: Nâng cấp Hệ thống Xây dựng (Build Mode & Ghost Placement)
+Mục tiêu: Thêm menu UI để chọn nhà, hiển thị "bóng ma" (Ghost) của tòa nhà khi di chuột để người chơi biết chính xác nó sẽ được đặt ở đâu trên Lưới vòng tròn.
+
+Hãy copy đoạn dưới đây dán vào Gemini:
+
+Role: Senior Game Developer
+Project: "Thirst Sea" (Three.js + Vite)
+Task: Upgrade the building placement system to include a UI selection menu and a "Ghost" preview mesh.
+
+Please update the following files:
+
+1. Update index.html:
+
+Add a bottom UI panel with two buttons: [Build: House (Cost: 10 Coal)] and [Cancel/Normal Mode].
+
+2. Update src/core/State.js:
+
+Add buildMode: null (can be 'HOUSE' or null).
+
+3. Update src/core/Input.js (Crucial Update):
+
+Create a "Ghost Mesh" (a semi-transparent Cube with opacity: 0.5, transparent: true). Add it to the scene but make it invisible by default.
+
+mousemove event: If State.buildMode === 'HOUSE', cast a ray. Use Grid.getSnappedPosition(x, z) to find the snapped coordinate. Move the Ghost Mesh to this snapped position and make it visible.
+
+Rotate the Ghost Mesh so it faces the center (0,0,0) using Math.atan2.
+
+click event: If State.buildMode === 'HOUSE', check if State.coal >= 10. If yes, deduct 10 Coal, place a real Building at the Ghost's position (with the correct rotation), and add it to State.buildings.
+
+If State.buildMode === null, hide the Ghost Mesh.
+
+Output: Provide the updated HTML and the full rewritten Input.js and State.js.

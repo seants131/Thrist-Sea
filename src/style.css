@@ -34,3 +34,40 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
+#build-menu {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #555;
+    display: flex;
+    gap: 15px;
+    z-index: 200;
+}
+
+#build-menu button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: #333;
+    border: 1px solid #777;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#build-menu button:hover {
+    background: #444;
+    border-color: #aaa;
+}
+
+#build-menu button.active {
+    background: #00897b;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}

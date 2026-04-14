@@ -1,0 +1,22 @@
+Prompt 2.3: Visual Polish (Chỉ báo Tầm nhìn & Tweening)
+Mục tiêu: Thêm vòng tròn Neon dưới đất để biết giới hạn nước, đổi màu nước biển và làm hiệu ứng khát nước mượt mà hơn.
+
+Khi core game đã chạy chuẩn, hãy "làm đẹp" bằng đoạn này:
+
+Task: Add visual polish to Thirst Sea: The Purifier's Range Indicator, ocean background, and smooth color transitions.
+
+1. Update src/core/Game.js:
+
+Change the Scene background color to a deep ocean blue (0x00151a).
+
+Range Indicator: Create a RingGeometry (inner radius: 19.5, outer radius: 20) with a MeshBasicMaterial (color: Cyan, transparent, opacity 0.3). Place it flat on the ground (rotation.x = -Math.PI / 2) around the Purifier. This visualizes the MAX_RADIUS of hydration.
+
+2. Update src/systems/Hydration.js (Smooth Transition):
+
+Currently, buildings snap from Cyan to SandyBrown instantly.
+
+Add a simple lerp (Linear Interpolation) to the building's material color.
+
+If Hydrated, material.color.lerp(Cyan, 0.05). If Thirsty, material.color.lerp(SandyBrown, 0.05). This will make the buildings slowly "dry out" over a few seconds when the Purifier stops.
+
+Output: Show the code updates for Game.js and Hydration.js. Ensure the Ring geometry doesn't clip through the ground.
