@@ -13,21 +13,25 @@ export const Grid = {
     },
 
     getSnappedPosition(x, z) {
-        // 1. Find the nearest Radius (Ring)
+        // 1. Find the nearest Ring
         const rawRadius = Math.sqrt(x * x + z * z);
-        const snappedRadius = Math.max(this.radiusInterval, Math.round(rawRadius / this.radiusInterval) * this.radiusInterval);
+        const ring = Math.ceil(rawRadius / this.radiusInterval);
         
-        // Don't allow snapping beyond the max rings
-        if (snappedRadius > this.radiusInterval * this.maxRings) {
+        // Don't allow snapping beyond the max rings or in the first ring (taken by the Purifier)
+        if (ring > this.maxRings || ring <= 1) {
             return { x: 9999, z: 9999, angle: 0, numSlots: 0 }; 
         }
 
-        // 2. Find the nearest Angle based on dynamic slots for THIS radius
-        const rawAngle = Math.atan2(x, z); // Use x, z to align with Three.js coordinate system
-        const numSlots = this.getSlotsInRing(snappedRadius);
+        const snappedRadius = (ring - 0.5) * this.radiusInterval;
+        const outerRadius = ring * this.radiusInterval;
+
+        // 2. Find the nearest Angle based on dynamic slots for the OUTER radius of this ring
+        const rawAngle = Math.atan2(x, z); 
+        const numSlots = this.getSlotsInRing(outerRadius);
         const angleStep = (Math.PI * 2) / numSlots;
         
-        const snappedAngle = Math.round(rawAngle / angleStep) * angleStep;
+        // Snap to the middle of the slot (between radial lines)
+        const snappedAngle = (Math.floor(rawAngle / angleStep) + 0.5) * angleStep;
 
         // 3. Convert back to Cartesian
         const snappedX = Math.sin(snappedAngle) * snappedRadius;
