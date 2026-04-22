@@ -104,11 +104,11 @@ export class Game {
         State.isNight = (State.time % cycleLength) >= dayLength;
 
         if (State.isNight) {
-            this.sun.color.setHex(0x3344ff);
-            this.sun.intensity = 0.5;
-            this.ambient.intensity = 0.4;
-            this.scene.background.setHex(0x00080a); // Darker ocean night
-            this.scene.fog.color.setHex(0x00080a);
+            this.sun.color.setHex(0x5566ff);
+            this.sun.intensity = 1.5;
+            this.ambient.intensity = 1.1;
+            this.scene.background.setHex(0x1a2633); // Even lighter blue-grey night
+            this.scene.fog.color.setHex(0x1a2633);
         } else {
             this.sun.color.setHex(0xffffff);
             this.sun.intensity = 3;

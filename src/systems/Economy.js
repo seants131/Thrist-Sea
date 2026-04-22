@@ -63,7 +63,7 @@ export const Economy = {
         if (timeEl) timeEl.innerText = State.time;
         if (phaseEl) {
             phaseEl.innerText = State.isNight ? "Night" : "Day";
-            phaseEl.style.color = State.isNight ? "#5c6bc0" : "#ffeb3b";
+            phaseEl.style.color = State.isNight ? "#81d4fa" : "#ffeb3b";
         }
         
         if (statusEl) {
